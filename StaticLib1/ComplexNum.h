@@ -1,8 +1,10 @@
 ﻿#pragma once
 #include <iostream>
+#define _USE_MATH_DEFINES
+#include <math.h>
 
 #define COMPLEX_EPS 0.000000001
-
+class PolarComplex;
 class StandartComplex {
 public:
 
@@ -13,10 +15,11 @@ public:
 	// Конструкторы //
 
 	StandartComplex();
-	StandartComplex(double re);
-	StandartComplex(double re, double im);
+	StandartComplex(double);
+	StandartComplex(double, double);
 	StandartComplex(const StandartComplex&) = default;  //К. копирования
-	StandartComplex(const StandartComplex&&);  //К. перемещения
+	StandartComplex(const PolarComplex&);               //К. преобразования
+	StandartComplex(const StandartComplex&&);           //К. перемещения
 
 	// Унарные операторы //
 
@@ -33,8 +36,8 @@ public:
 
 	// Операторы сравнения //
 
-	friend bool operator==(const StandartComplex&, const StandartComplex&);
-	friend bool operator!=(const StandartComplex&, const StandartComplex&);
+	bool operator==(const StandartComplex&);
+	bool operator!=(const StandartComplex&);
 
 	// Бинарные операторы //
 
@@ -88,21 +91,22 @@ public:
 	~StandartComplex();
 };
 
-/*
+
 class PolarComplex {
 public:
 
 	// Data //
 
-	double Re, Im;
+	double ro, fi;
 
 	// Конструкторы //
 
 	PolarComplex();
-	PolarComplex(double re);
-	PolarComplex(double re, double im);
+	PolarComplex(double);
+	PolarComplex(double, double);
 	PolarComplex(const PolarComplex&) = default;  //К. копирования
-	PolarComplex(const PolarComplex&&);  //К. перемещения
+	PolarComplex(const PolarComplex&&);           //К. перемещения
+	PolarComplex(const StandartComplex&);         //K. преобразования 
 
 	// Унарные операторы //
 
@@ -119,8 +123,8 @@ public:
 
 	// Операторы сравнения //
 
-	friend bool operator==(const PolarComplex&, const PolarComplex&);
-	friend bool operator!=(const PolarComplex&, const PolarComplex&);
+	bool operator==(const PolarComplex&);
+	bool operator!=(const PolarComplex&);
 
 	// Бинарные операторы //
 
@@ -173,4 +177,3 @@ public:
 
 	~PolarComplex();
 };
-*/

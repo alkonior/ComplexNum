@@ -7,6 +7,8 @@ StandartComplex::StandartComplex(double re) : Re(re), Im(0) {}
 
 StandartComplex::StandartComplex(double re, double im) : Re(re), Im(im) {}
 
+StandartComplex::StandartComplex(const PolarComplex& in) : Re(in.ro*cos(in.fi)), Im(in.ro*sin(in.fi)) {}
+
 StandartComplex::~StandartComplex() {}
 
 StandartComplex::StandartComplex(const StandartComplex&& in)
@@ -28,41 +30,39 @@ StandartComplex StandartComplex::operator+()
 StandartComplex StandartComplex::operator--()
 {
 	Re--;
-	Im--;
 	return *this;
 }
 
 StandartComplex StandartComplex::operator++()
 {
 	Re++;
-	Im++;
 	return *this;
 }
 
 StandartComplex& StandartComplex::operator--(int)
 {
 	Re--;
-	Im--;
 	return *this;
 }
 
 StandartComplex& StandartComplex::operator++(int)
 {
 	Re++;
-	Im++;
 	return *this;
 }
 
-bool operator==(const StandartComplex& left_in, const StandartComplex& right_in)
+bool StandartComplex::operator==(const StandartComplex& in)
 {
-	return ((abs(left_in.Re - right_in.Re) < COMPLEX_EPS) && (abs(left_in.Im - right_in.Im) < COMPLEX_EPS));
+	return ((abs(Re - in.Re) < COMPLEX_EPS) && (abs(Im - in.Im) < COMPLEX_EPS));
 }
 
-bool operator!=(const StandartComplex& left_in, const StandartComplex& right_in)
+bool StandartComplex::operator!=(const StandartComplex& in)
 {
-	return !(left_in == right_in);
+	return !(*this == in);
 }
+
 // + //
+
 StandartComplex StandartComplex::operator+(const StandartComplex& in)
 {
 	return StandartComplex(Re + in.Re, Im + in.Im);
@@ -77,7 +77,9 @@ StandartComplex operator+(const double& left_in, const StandartComplex& right_in
 {
 	return StandartComplex(left_in + right_in.Re, right_in.Im);
 }
+
 // - //
+
 StandartComplex StandartComplex::operator-(const StandartComplex& in)
 {
 	return StandartComplex(Re - in.Re, Im - in.Im);
@@ -92,10 +94,12 @@ StandartComplex operator-(const double& left_in, const StandartComplex& right_in
 {
 	return StandartComplex(left_in - right_in.Re, right_in.Im);
 }
+
 // * //
+
 StandartComplex StandartComplex::operator*(const StandartComplex& in)
 {
-	return StandartComplex((this->Re * in.Re - Im * in.Im), (this->Re * in.Im + Im * in.Re));
+	return StandartComplex((Re * in.Re - Im * in.Im), (Re * in.Im + Im * in.Re));
 }
 
 StandartComplex StandartComplex::operator*(const double& right_in)
@@ -107,7 +111,9 @@ StandartComplex operator*(const double& left_in, const StandartComplex& right_in
 {
 	return StandartComplex(left_in * right_in.Re, left_in * right_in.Im);
 }
+
 // / //
+
 StandartComplex StandartComplex::operator/(const StandartComplex& in)
 {
 	double cd = in.Im*in.Im + in.Re*in.Re;
@@ -147,8 +153,6 @@ StandartComplex& StandartComplex::operator=(const StandartComplex&& in)
 	return *this;
 }
 
-
-
 // Потоки //
 
 std::ostream& operator<<(std::ostream& cout, StandartComplex& in) {
@@ -160,6 +164,8 @@ std::istream& operator>>(std::istream& cin, StandartComplex& out) {
 	cin >> out.Re >> out.Re;
 	return cin;
 }
+
+// Особые функции //
 
 double abs(const StandartComplex& in)
 {

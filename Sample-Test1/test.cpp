@@ -33,13 +33,13 @@ TEST(StandartComplex, Unary_Operators)
 	ASSERT_TRUE(isEqual(c2.Im, -1.5));
 	c2++;
 	ASSERT_TRUE(isEqual(c2.Re, -0.0004+1));
-	ASSERT_TRUE(isEqual(c2.Im, -1.5+1));
+	ASSERT_TRUE(isEqual(c2.Im, -1.5));
 	c2--;
 	ASSERT_TRUE(isEqual(c2.Re, -0.0004));
 	ASSERT_TRUE(isEqual(c2.Im, -1.5));
 	++c2;
 	ASSERT_TRUE(isEqual(c2.Re, -0.0004+1));
-	ASSERT_TRUE(isEqual(c2.Im, -1.5+1));
+	ASSERT_TRUE(isEqual(c2.Im, -1.5));
 	--c2;
 	ASSERT_TRUE(isEqual(c2.Re, -0.0004));
 	ASSERT_TRUE(isEqual(c2.Im, -1.5));
