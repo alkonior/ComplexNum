@@ -5,6 +5,7 @@
 
 #define COMPLEX_EPS 0.000000001
 class PolarComplex;
+
 class StandartComplex {
 public:
 
@@ -20,6 +21,7 @@ public:
 	StandartComplex(const StandartComplex&) = default;  //К. копирования
 	StandartComplex(const PolarComplex&);               //К. преобразования
 	StandartComplex(const StandartComplex&&);           //К. перемещения
+	StandartComplex(const PolarComplex&&);           //К. перемещения
 
 	// Унарные операторы //
 
@@ -93,11 +95,20 @@ public:
 
 
 class PolarComplex {
-public:
+
 
 	// Data //
 
-	double ro, fi;
+	double r, fi;
+
+public:
+	// Гетеры и сетеры //
+
+	void setR(double);
+	double getR() const;
+    void setFi(double);
+	double getFi() const;
+
 
 	// Конструкторы //
 
